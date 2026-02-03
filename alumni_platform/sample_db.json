@@ -1,0 +1,94 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Super Admin",
+      "email": "admin@focs.com",
+      "role": "admin",
+      "passwordHash": "SIM_SHA256_471ef857",
+      "salt": "abc123salt",
+      "bioEncoded": "U3lzdGVtIEFkbWluaXN0cmF0b3IgZm9yIEFsdW1uaSBDb25uZWN0",
+      "encryptionKey": "SIMULATED_KEY_ADMIN"
+    },
+    {
+      "id": "2",
+      "name": "Jane Doe",
+      "email": "alumni@focs.com",
+      "role": "alumni",
+      "passwordHash": "SIM_SHA256_4c3c3a38",
+      "salt": "alumnisalt",
+      "bioEncoded": "U29mdHdhcmUgRW5naW5lZXIgYXQgR29vZ2xlIHwgQmF0Y2ggb2YgMjAyMA==",
+      "encryptionKey": "SIMULATED_KEY_ALUMNI"
+    },
+    {
+      "id": "3",
+      "name": "John Smith",
+      "email": "student@focs.com",
+      "role": "student",
+      "passwordHash": "SIM_SHA256_3d2a0566",
+      "salt": "studentsalt",
+      "bioEncoded": "RmluYWwgeWVhciBDU0Ugc3R1ZGVudCBpbnRlcmVzdGVkIGluIEN5YmVyc2VjdXJpdHk=",
+      "encryptionKey": "SIMULATED_KEY_STUDENT"
+    }
+  ],
+  "mentorships": [
+    {
+      "id": "m1",
+      "studentId": "3",
+      "studentName": "John Smith",
+      "topic": "Career advice in Cybersecurity",
+      "status": "Pending",
+      "timestamp": "2026-01-28T10:00:00.000Z"
+    },
+    {
+      "id": "m2",
+      "studentId": "3",
+      "studentName": "John Smith",
+      "topic": "Backend Development Tips",
+      "status": "Approved",
+      "timestamp": "2026-01-27T14:30:00.000Z"
+    }
+  ],
+  "referrals": [
+    {
+      "id": "r1",
+      "alumniId": "2",
+      "alumniName": "Jane Doe",
+      "company": "Google",
+      "role": "Software Engineer Intern",
+      "desc": "Looking for passionate developers for our summer internship program.",
+      "hash": "SIM_SHA256_4e8a2",
+      "timestamp": "2026-01-28T09:15:00.000Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg1",
+      "fromId": "2",
+      "toId": "3",
+      "encryptedContent": "SGksIEpvaG4hIEkgY2FuIG1lbnRvciB5b3Uu",
+      "iv": "SIM_IV_1",
+      "timestamp": "2026-01-28T11:00:00.000Z"
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2026-01-28T11:05:00.000Z",
+      "userId": "2",
+      "action": "MSG_SEND",
+      "details": "Sent encrypted msg to 3"
+    },
+    {
+      "timestamp": "2026-01-28T09:15:00.000Z",
+      "userId": "2",
+      "action": "REF_POST",
+      "details": "Posted referral for Google"
+    },
+    {
+      "timestamp": "2026-01-28T08:00:00.000Z",
+      "userId": "SYSTEM",
+      "action": "INIT",
+      "details": "System initialized with sample data"
+    }
+  ]
+}
