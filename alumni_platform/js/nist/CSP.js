@@ -80,6 +80,10 @@ class CredentialServiceProvider {
 
     async importKey(jsonStr) {
         if (this.isSimulated) return jsonStr;
+        // HYBRID FIX: Handle simulated keys from seeded DB
+        if (typeof jsonStr === 'string' && jsonStr.startsWith('SIMULATED_KEY')) {
+            return jsonStr;
+        }
         return await window.crypto.subtle.importKey(
             "jwk",
             JSON.parse(jsonStr),
@@ -90,7 +94,10 @@ class CredentialServiceProvider {
     }
 
     async encryptData(text, key) {
-        if (this.isSimulated) return { content: btoa(text), iv: "SIM_IV_" + Date.now() };
+        // HYBRID FIX: If key is a simulated string, use sim logic
+        if (this.isSimulated || (typeof key === 'string' && key.startsWith('SIMULATED_KEY'))) {
+            return { content: btoa(text), iv: "SIM_IV_" + Date.now() };
+        }
 
         const encoder = new TextEncoder();
         const encoded = encoder.encode(text);
@@ -109,7 +116,8 @@ class CredentialServiceProvider {
     }
 
     async decryptData(encryptedHex, ivHex, key) {
-        if (this.isSimulated) {
+        // HYBRID FIX: If key is a simulated string, use sim logic
+        if (this.isSimulated || (typeof key === 'string' && key.startsWith('SIMULATED_KEY'))) {
             try { return atob(encryptedHex); } catch(e) { return "[Error]"; }
         }
 
