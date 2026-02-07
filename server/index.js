@@ -8,6 +8,7 @@ const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static('../alumni_platform'));
 
 // --- UTILS ---
 const generateId = () => Date.now().toString();
@@ -16,7 +17,7 @@ const generateId = () => Date.now().toString();
 
 // Login
 app.post('/api/auth/login', (req, res) => {
-    const { email, password } = req.body; // Password here is actually the plain text from UI
+    const { email, password } = req.body;
     
     db.get("SELECT * FROM users WHERE email = ?", [email], (err, user) => {
         if (err) return res.status(500).json({ error: err.message });
