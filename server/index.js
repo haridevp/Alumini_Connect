@@ -8,7 +8,6 @@ const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('../alumni_platform'));
 
 // --- UTILS ---
 const generateId = () => Date.now().toString();
