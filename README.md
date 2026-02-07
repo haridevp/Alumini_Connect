@@ -75,9 +75,7 @@ npm start
 ### 3. Access the Frontend
 1. Open the `alumni_platform` folder.
 2. Open `index.html` in your web browser.
-3. Login with the default credentials:
-   - **Admin:** `admin@focs.com` / `password`
-   - **Student:** `student@focs.com` / `password`
+3. Login with the default credentials provided in `credentials.txt`.
 
 ## Environment Setup
-The project comes pre-seeded with a SQLite database (`server/alumni.sqlite`). No manual database configuration is required.
+The project automatically initializes and seeds a SQLite database (`server/alumni.sqlite`) on the first run. No manual database configuration is required.
