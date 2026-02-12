@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 // Connect to Database
 connectDB();
 
-const allowedOrigins = ['https://haridevp.dev', 'https://haridevp.github.io'];
+const allowedOrigins = ['https://haridevp.dev', 'https://haridevp.github.io', 'https://alumini-connect-kpel.onrender.com'];
 
 app.use(cors({
     origin: function (origin, callback) {
