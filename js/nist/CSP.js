@@ -102,7 +102,7 @@ class CredentialServiceProvider {
             );
             return new TextDecoder().decode(decrypted);
         } catch (e) {
-            console.error(e);
+            console.warn("Decryption failed (likely due to invalid key or tampered data):", e.message);
             return "[Decryption Failed - Integrity Check Failed]";
         }
     }
