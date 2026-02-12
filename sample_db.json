@@ -5,30 +5,30 @@
       "name": "Super Admin",
       "email": "admin@focs.com",
       "role": "admin",
-      "passwordHash": "SIM_SHA256_471ef857",
-      "salt": "abc123salt",
-      "bioEncoded": "U3lzdGVtIEFkbWluaXN0cmF0b3IgZm9yIEFsdW1uaSBDb25uZWN0",
-      "encryptionKey": "SIMULATED_KEY_ADMIN"
+      "passwordHash": "d2a529f68ad9a9ba12883955b5312462d088819cf44b7fd47b1c488c353cbdad",
+      "salt": "0de96af206673c9777dcfe599f028a6b",
+      "bioEncoded": "U3lzdGVtIEFkbWluaXN0cmF0b3IgZm9yIEFsdW1pbmkgQ29ubmVjdA==",
+      "encryptionKey": "{\"key_ops\":[\"encrypt\",\"decrypt\"],\"ext\":true,\"alg\":\"A256GCM\",\"kty\":\"oct\",\"k\":\"kCuCDjvqoKkXTfRFu4Vla0H7qcN9G3Px5DsboPGXTos\"}"
     },
     {
       "id": "2",
       "name": "Jane Doe",
       "email": "alumni@focs.com",
       "role": "alumni",
-      "passwordHash": "SIM_SHA256_4c3c3a38",
-      "salt": "alumnisalt",
+      "passwordHash": "bdc89435161e10eb83a9cc9a41a035e2028650d303ac6c30fae4612dd3c9e2da",
+      "salt": "e878efa3334e320b891d8a58ed3042e9",
       "bioEncoded": "U29mdHdhcmUgRW5naW5lZXIgYXQgR29vZ2xlIHwgQmF0Y2ggb2YgMjAyMA==",
-      "encryptionKey": "SIMULATED_KEY_ALUMNI"
+      "encryptionKey": "{\"key_ops\":[\"encrypt\",\"decrypt\"],\"ext\":true,\"alg\":\"A256GCM\",\"kty\":\"oct\",\"k\":\"OXMb-o8QQtxpCjw0lnSqwDtWIsXpp9o3pE8m6kqlstk\"}"
     },
     {
       "id": "3",
       "name": "John Smith",
       "email": "student@focs.com",
       "role": "student",
-      "passwordHash": "SIM_SHA256_3d2a0566",
-      "salt": "studentsalt",
+      "passwordHash": "199c6b8ec546502e7884a2c904dba5ba09d7211e7e9189412410591edec95331",
+      "salt": "29d13eb1ce7dc422f29f4f98f20f109d",
       "bioEncoded": "RmluYWwgeWVhciBDU0Ugc3R1ZGVudCBpbnRlcmVzdGVkIGluIEN5YmVyc2VjdXJpdHk=",
-      "encryptionKey": "SIMULATED_KEY_STUDENT"
+      "encryptionKey": "{\"key_ops\":[\"encrypt\",\"decrypt\"],\"ext\":true,\"alg\":\"A256GCM\",\"kty\":\"oct\",\"k\":\"26YUsC4dkqLgTzriUOldGA4R0Em1ieDzxQlSL41SVI4\"}"
     }
   ],
   "mentorships": [
@@ -57,7 +57,7 @@
       "company": "Google",
       "role": "Software Engineer Intern",
       "desc": "Looking for passionate developers for our summer internship program.",
-      "hash": "SIM_SHA256_4e8a2",
+      "hash": "47d26a53e33ee481a1e82995b323a3d1deb7bcebc002ada260005e225b489dca",
       "timestamp": "2026-01-28T09:15:00.000Z"
     }
   ],
@@ -66,8 +66,8 @@
       "id": "msg1",
       "fromId": "2",
       "toId": "3",
-      "encryptedContent": "SGksIEpvaG4hIEkgY2FuIG1lbnRvciB5b3Uu",
-      "iv": "SIM_IV_1",
+      "encryptedContent": "ed6aee6b8322d27fc6f9dd44f4869217dc62daa851644529fd31011173133000f0b28ac4dc35aafdb8eb23",
+      "iv": "10caea5a4c24f2a2165b4b0f",
       "timestamp": "2026-01-28T11:00:00.000Z"
     }
   ],
