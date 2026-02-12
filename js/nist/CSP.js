@@ -112,6 +112,21 @@ class CredentialServiceProvider {
 
     // --- DATA MANAGEMENT (API CALLS) ---
     
+    async checkUserExists(email) {
+        try {
+            const res = await fetch(this.apiUrl + '/auth/exists', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ email }) 
+            });
+            if (res.ok) {
+                const data = await res.json();
+                return data.exists;
+            }
+            return false;
+        } catch(e) { return false; }
+    }
+
     async getUserByEmail(email) {
         try {
             // We use the login endpoint to find the user by email for now, 

@@ -50,6 +50,17 @@ app.post('/api/auth/login', async (req, res) => {
     }
 });
 
+// Check if user exists (for registration)
+app.post('/api/auth/exists', async (req, res) => {
+    const { email } = req.body;
+    try {
+        const user = await User.findOne({ email });
+        res.json({ exists: !!user });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // Register
 app.post('/api/auth/register', async (req, res) => {
     console.log("Register Request Body:", req.body);
