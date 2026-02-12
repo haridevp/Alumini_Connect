@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 // Connect to Database
 connectDB();
 
-const allowedOrigins = ['https://haridevp.dev', 'https://haridevp.github.io', 'https://alumini-connect-kpel.onrender.com'];
+const allowedOrigins = ['https://haridevp.dev', 'https://haridevp.github.io', 'https://alumini-connect-kpel.onrender.com', 'http://localhost:5500', 'http://127.0.0.1:5500', 'http://localhost:3000'];
 
 app.use(cors({
     origin: function (origin, callback) {
@@ -52,6 +52,7 @@ app.post('/api/auth/login', async (req, res) => {
 
 // Register
 app.post('/api/auth/register', async (req, res) => {
+    console.log("Register Request Body:", req.body);
     const { name, email, role, passwordHash, salt, bioEncoded } = req.body;
     const id = generateId(); // Use our string ID generator 
     const encryptionKey = req.body.encryptionKey || "SERVER_GENERATED_KEY"; 
@@ -60,6 +61,7 @@ app.post('/api/auth/register', async (req, res) => {
         // Check if user exists
         const userExists = await User.findOne({ email });
         if (userExists) {
+            console.log("User already exists:", email);
             return res.status(400).json({ message: 'User already exists' });
         }
 
@@ -74,6 +76,7 @@ app.post('/api/auth/register', async (req, res) => {
             encryptionKey
         });
 
+        console.log("User created successfully:", user.id);
         res.status(201).json({
             id: user.id,
             name: user.name,
@@ -81,6 +84,7 @@ app.post('/api/auth/register', async (req, res) => {
             role: user.role,
         });
     } catch (err) {
+        console.error("Registration Error:", err);
         res.status(500).json({ error: err.message });
     }
 });
