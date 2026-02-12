@@ -2,6 +2,10 @@
 
 Project for the course 23CSE313 - Foundations of Cyber Security for Lab Evaluation 1
 
+## 🚀 Live Demo
+- **Frontend (Application):** [https://haridevp.dev/Alumini_Connect/](https://haridevp.dev/Alumini_Connect/)
+- **Backend (API):** [https://alumini-connect-kpel.onrender.com](https://alumini-connect-kpel.onrender.com)
+
 ## Project Overview
 
 **Alumni Connect** is a secure, role-based networking system designed to facilitate mentorship and job referrals between students and alumni. The application ensures that personal communications are encrypted, credentials are identity-proofed, and critical data like job referrals are tamper-evident.
@@ -47,12 +51,12 @@ This application implements all required security components as defined in the e
 - **Base64:** User Bio information is encoded into **Base64** strings by the Registration Authority (RA) before storage. This ensures safe handling of special characters and demonstrates encoding vs. encryption.
 
 ## Tech Stack
-- **Frontend Architecture:** Vanilla JS (Implementing NIST Actors: RA, CSP, RP, Verifier)
-- **Backend:** Node.js + Express.js
-- **Database:** SQLite (File-based, persistent)
-- **Cryptography:** Web Crypto API (Browser Native)
+- **Frontend:** Vanilla JS (Implementing NIST Actors: RA, CSP, RP, Verifier) hosted on **GitHub Pages**.
+- **Backend:** Node.js + Express.js hosted on **Render**.
+- **Database:** MongoDB Atlas (Cloud NoSQL).
+- **Cryptography:** Web Crypto API (Browser Native).
 
-## Running the Application
+## Running Locally (Development)
 
 ### 1. Install Dependencies
 Navigate to the server directory and install the required Node.js packages:
@@ -61,18 +65,27 @@ cd server
 npm install
 ```
 
-### 2. Start the Backend
-Start the Express server (runs on port 3000):
+### 2. Configure Environment
+Create a `.env` file in the `server` directory with your MongoDB Connection String:
+```
+MONGODB_URI=your_mongodb_connection_string
+PORT=3000
+```
+
+### 3. Start the Backend
+Start the Express server:
 ```bash
 node index.js
 # Or
 npm start
 ```
 
-### 3. Access the Frontend
-1. Open the `alumni_platform` folder.
-2. Open `index.html` in your web browser.
-3. Login with the default credentials provided in `credentials.txt`.
+### 4. Access the Frontend
+1. Open `index.html` in your web browser.
+2. Note: You may need to update `js/nist/CSP.js` to point to `http://localhost:3000/api` for local testing.
 
-## Environment Setup
-The project automatically initializes and seeds a SQLite database (`server/alumni.sqlite`) on the first run. No manual database configuration is required.
+## Deployment Architecture
+- **Frontend:** Deployed via GitHub Pages.
+- **Backend:** Deployed as a Web Service on Render.
+- **Database:** Hosted on MongoDB Atlas.
+- **Security:** HTTPS enforced everywhere. CORS restricted to authorized domains.
