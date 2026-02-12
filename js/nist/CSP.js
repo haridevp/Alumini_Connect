@@ -8,16 +8,10 @@
 class CredentialServiceProvider {
     constructor() {
         this.apiUrl = 'https://alumini-connect-kpel.onrender.com/api';
-        this.isSimulated = false;
         this.init();
     }
 
     init() {
-        // Check Web Crypto API
-        if (!window.crypto || !window.crypto.subtle) {
-            console.warn("CSP: Web Crypto API Unavailable. Simulation Mode.");
-            this.isSimulated = true;
-        }
         console.log("CSP: Connected to Backend at " + this.apiUrl);
     }
 
@@ -39,16 +33,6 @@ class CredentialServiceProvider {
 
     // --- HASHING ---
     async hashText(text, saltHex = '') {
-        if (this.isSimulated) {
-            let hash = 0;
-            const str = text + saltHex;
-            for (let i = 0; i < str.length; i++) {
-                hash = ((hash << 5) - hash) + str.charCodeAt(i);
-                hash |= 0;
-            }
-            return "SIM_SHA256_" + Math.abs(hash).toString(16);
-        }
-
         const encoder = new TextEncoder();
         const data = encoder.encode(text + saltHex);
         const hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
@@ -62,8 +46,6 @@ class CredentialServiceProvider {
 
     // --- ENCRYPTION (AES-GCM) ---
     async generateKey() {
-        if (this.isSimulated) return "SIMULATED_KEY_" + Date.now();
-
         const key = await window.crypto.subtle.generateKey(
             { name: "AES-GCM", length: 256 },
             true,
@@ -73,17 +55,11 @@ class CredentialServiceProvider {
     }
 
     async exportKey(key) {
-        if (this.isSimulated) return key;
         const exported = await window.crypto.subtle.exportKey("jwk", key);
         return JSON.stringify(exported);
     }
 
     async importKey(jsonStr) {
-        if (this.isSimulated) return jsonStr;
-        // HYBRID FIX: Handle simulated keys from seeded DB
-        if (typeof jsonStr === 'string' && jsonStr.startsWith('SIMULATED_KEY')) {
-            return jsonStr;
-        }
         return await window.crypto.subtle.importKey(
             "jwk",
             JSON.parse(jsonStr),
@@ -94,11 +70,6 @@ class CredentialServiceProvider {
     }
 
     async encryptData(text, key) {
-        // HYBRID FIX: If key is a simulated string, use sim logic
-        if (this.isSimulated || (typeof key === 'string' && key.startsWith('SIMULATED_KEY'))) {
-            return { content: btoa(text), iv: "SIM_IV_" + Date.now() };
-        }
-
         const encoder = new TextEncoder();
         const encoded = encoder.encode(text);
         const iv = window.crypto.getRandomValues(new Uint8Array(12));
@@ -116,11 +87,6 @@ class CredentialServiceProvider {
     }
 
     async decryptData(encryptedHex, ivHex, key) {
-        // HYBRID FIX: If key is a simulated string, use sim logic
-        if (this.isSimulated || (typeof key === 'string' && key.startsWith('SIMULATED_KEY'))) {
-            try { return atob(encryptedHex); } catch(e) { return "[Error]"; }
-        }
-
         try {
             const encryptedBuffer = this.hexToBuffer(encryptedHex);
             const ivBuffer = this.hexToBuffer(ivHex);
@@ -239,15 +205,6 @@ class CredentialServiceProvider {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ userId, action, details })
         });
-    }
-
-    // Demo Attack
-    async corruptReferral(id) {
-        // This would need a specific backend endpoint to simulate corruption
-        // or we just modify the DOM/local state if strictly for demo.
-        // For now, let's just log it.
-        console.warn("Attack simulation requires backend support or local DOM manipulation.");
-        this.log('ATTACKER', 'DATA_TAMPER', `Attempted corruption on Ref ${id}`);
     }
 }
 

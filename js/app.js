@@ -285,11 +285,6 @@ const app = {
             // NIST ACTOR: CSP (Integrity Check)
             const isValid = await csp.verifyIntegrity(dataString, ref.hash);
 
-            let attackBtn = '';
-            if (this.currentUser.role === 'admin' && isValid) {
-                attackBtn = `<button onclick="app.simulateAttack('${ref.id}')" class="btn btn-text" style="color:var(--danger); float:right; font-size:0.8rem;">⚡ Corrupt Data (Demo)</button>`;
-            }
-
             const div = document.createElement('div');
             div.className = 'card';
             div.innerHTML = `
@@ -299,7 +294,7 @@ const app = {
                         '<span class="badge badge-enc"><i class="fas fa-check-circle"></i> Verified</span>' : 
                         '<span class="badge" style="background:#fee2e2; color:#b91c1c"><i class="fas fa-exclamation-triangle"></i> TAMPERED</span>'}
                 </div>
-                <h4 style="color:var(--primary); margin-bottom:0.5rem;">${ref.company} ${attackBtn}</h4>
+                <h4 style="color:var(--primary); margin-bottom:0.5rem;">${ref.company}</h4>
                 <p style="color:var(--text-secondary); margin-bottom:1rem;">${ref.desc}</p>
                 <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid #f3f4f6; padding-top:1rem; font-size:0.85rem;">
                     <span><i class="fas fa-user-tie"></i> ${ref.alumniName}</span>
@@ -307,16 +302,6 @@ const app = {
                 </div>
             `;
             list.appendChild(div);
-        }
-    },
-
-    simulateAttack(id) {
-        if(confirm("⚠ SIMULATE ATTACK?\n\nThis will modify the database record WITHOUT updating the digital signature.\n\nExpected Result: Integrity Check Fail.")) {
-            csp.corruptReferral(id);
-            // We can't immediately reload here because simulation is tricky with remote DB
-            // unless we actually implemented the corruption endpoint.
-            // For now, let's just alert.
-            alert("Attack simulated in logs. UI update requires page refresh or re-fetch.");
         }
     },
 

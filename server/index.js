@@ -41,8 +41,7 @@ app.post('/api/auth/login', async (req, res) => {
 // Register
 app.post('/api/auth/register', async (req, res) => {
     const { name, email, role, passwordHash, salt, bioEncoded } = req.body;
-    const id = generateId(); // Use our string ID generator
-    // Simulate key generation on server or accept from client? 
+    const id = generateId(); // Use our string ID generator 
     const encryptionKey = req.body.encryptionKey || "SERVER_GENERATED_KEY"; 
 
     try {

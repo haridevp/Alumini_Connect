@@ -34,17 +34,14 @@ This application implements all required security components as defined in the e
 - **Key Management:** Each user acts as a node with a specific **AES-GCM Key** generated during registration.
 
 ### 4. Key Exchange Mechanism
-- **Mechanism:** Simulated Key Directory.
 - **Implementation:**
     - The CSP maintains a directory of user keys (stored as JWK).
     - When User A sends a message to User B, the CSP retrieves User B's **Encryption Key**.
     - The message is encrypted client-side before transmission.
-    - *Note:* For this lab simulation, we use a shared directory model to demonstrate the flow of key retrieval and usage.
 
 ### 5. Data Integrity & Tamper Detection (Digital Signatures)
 - **Hashing:** Critical data (Job Referrals) is signed using a **SHA-256** hash of the content (`Company + Role + Description`).
 - **Tamper Detection:** The application calculates the hash of the data on load and compares it with the stored signature.
-- **Attack Simulation:** A dedicated **"Simulate Attack"** feature allows the Admin to modify a database record *without* updating the signature, instantly triggering a "TAMPERED" warning in the UI.
 
 ### 6. Encoding
 - **Base64:** User Bio information is encoded into **Base64** strings by the Registration Authority (RA) before storage. This ensures safe handling of special characters and demonstrates encoding vs. encryption.
