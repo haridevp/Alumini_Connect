@@ -60,13 +60,18 @@ class CredentialServiceProvider {
     }
 
     async importKey(jsonStr) {
-        return await window.crypto.subtle.importKey(
-            "jwk",
-            JSON.parse(jsonStr),
-            { name: "AES-GCM" },
-            true,
-            ["encrypt", "decrypt"]
-        );
+        try {
+            return await window.crypto.subtle.importKey(
+                "jwk",
+                JSON.parse(jsonStr),
+                { name: "AES-GCM" },
+                true,
+                ["encrypt", "decrypt"]
+            );
+        } catch (e) {
+            console.warn("CSP: Invalid Encryption Key found (Legacy/Corrupt User). Generating temporary session key.");
+            return await this.generateKey();
+        }
     }
 
     async encryptData(text, key) {
