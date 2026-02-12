@@ -7,7 +7,7 @@
  */
 class CredentialServiceProvider {
     constructor() {
-        this.apiUrl = 'http://localhost:3000/api';
+        this.apiUrl = 'https://alumini-connect-kpel.onrender.com/api';
         this.isSimulated = false;
         this.init();
     }
