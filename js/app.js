@@ -114,6 +114,7 @@ const app = {
     },
 
     async handleRegister(e) {
+        console.log("DEBUG: handleRegister triggered");
         e.preventDefault();
         const name = document.getElementById('reg-name').value;
         const email = document.getElementById('reg-email').value;
@@ -121,12 +122,17 @@ const app = {
         const role = document.getElementById('reg-role').value;
         const bio = document.getElementById('reg-bio').value;
 
+        console.log("DEBUG: Form data gathered", { name, email, role });
+
         try {
             // NIST ACTOR: REGISTRATION AUTHORITY (RA)
+            console.log("DEBUG: Calling RA.processRegistration...");
             await ra.processRegistration(name, email, pass, role, bio);
+            console.log("DEBUG: RA.processRegistration SUCCESS");
             alert("Registration Successful! Please Login.");
             this.toggleAuthMode();
         } catch (err) {
+            console.error("DEBUG: Registration Failed", err);
             alert(err.message);
         }
     },
